@@ -8,6 +8,7 @@
       <ul>
         <li><b><%= t ".price" %>: </b><%= t(".price_yen", price: (number_with_delimiter @book.price)) %></li>
         <li><b><%= t ".publish_date" %>: </b><%= @book.publish_date %></li>
+        <li><b><%= t ".category" %>: </b><%= @book.category.try(:name) %></li>
       </ul>
     </div>
   </div>
@@ -16,6 +17,9 @@
   <%= simple_format @book.description %>
   <%= link_to t(".edit"), edit_book_path(@book), class: "btn btn-primary" %>
   <%= button_tag t(".delete"), class: "btn btn-warning", data: { toggle: "modal", target: "#delete-book" } %>
+  <% if user_signed_in? %>
+    <%= link_to t(".review_new"), new_book_review_path(@book), class: "btn btn-info" %>
+  <% end %>
   <%= link_to t(".return"), books_path, class: "btn btn-secondary" %>
 </div>
 
