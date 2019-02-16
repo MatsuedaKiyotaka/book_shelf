@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
-  before_action :set_book, only: [:show, :new]
-  before_action :set_review, only: :show
+  before_action :set_book, only: [:show, :new, :edit]
+  before_action :set_review, only: [:show, :edit, :update, :destroy]
+
   def new
     @book = Book.find(params[:book_id])
     @review = Review.new
@@ -20,6 +21,22 @@ class ReviewsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end 
+  
+  def update
+    if @review.update(review_params)
+      redirect_to @review.book, notice: "レビューを更新しました。"
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @review.destroy
+    redirect_to @review.book, notice: "レビューを削除しました。"
   end
 
   private
