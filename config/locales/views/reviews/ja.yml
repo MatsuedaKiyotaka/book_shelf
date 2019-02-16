@@ -2,3 +2,7 @@ ja:
   reviews:
     new:
       title: レビュー登録
+    show:
+      title: カスタマーレビュー
+      edit: 編集
+      back: 戻る

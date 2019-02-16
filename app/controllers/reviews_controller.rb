@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-  before_action :set_book, only: :new
+  before_action :set_book, only: [:show, :new]
+  before_action :set_review, only: :show
   def new
     @book = Book.find(params[:book_id])
     @review = Review.new
@@ -18,6 +19,9 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def review_params
@@ -26,5 +30,9 @@ class ReviewsController < ApplicationController
 
   def set_book
     @book = Book.find(params[:book_id])
+  end
+
+  def set_review
+    @review = Review.find(params[:id])
   end
 end
