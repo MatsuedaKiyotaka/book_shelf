@@ -2,7 +2,9 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:edit, :update, :destroy]
   
   def index
-    @books = Book.with_attached_image.find_newest_books(params[:page])
+    @q = Book.ransack(params[:q])
+    @books = @q.result.with_attached_image.find_newest_books(params[:page])
+
   end
   
   def show
